@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Barış Benimle daveti</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f7f3ef;
+        color: #241c1c;
+      }
+      main {
+        max-width: 36rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 3rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+        line-height: 1.3;
+        font-weight: 600;
+      }
+      p, li {
+        font-size: 1.05rem;
+        line-height: 1.55;
+      }
+      a {
+        color: #6d4c41;
+      }
+      code {
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Barış Benimle daveti</h1>
+      <p>Bu sayfa, uygulama kurulu değilken davet bağlantısını açıklar.</p>
+      <p>Davet şifresi bağlantının içinde değildir. Şifreyi uygulama içinde yazarsın.</p>
+      <p>
+        Uygulamayı kurmak daveti kendiliğinden taşımaz. Kurduktan sonra bu bağlantıya yeniden dokun
+        ya da bağlantıyı uygulamadaki davet alanına yapıştır.
+      </p>
+      <p><a id="open-app" href="barisbenimle://invite">Uygulamada aç</a></p>
+      <p>Bağlantı: <code id="link"></code></p>
+    </main>
+    <script>
+      const parts = location.pathname.split("/").filter(Boolean);
+      const index = parts.lastIndexOf("invite");
+      const token = index >= 0 ? parts[index + 1] || "" : "";
+      const valid = /^[A-Za-z0-9_-]{43}$/.test(token);
+      const appUrl = valid ? "barisbenimle://invite/" + token : "barisbenimle://invite";
+      document.getElementById("open-app").href = appUrl;
+      document.getElementById("link").textContent = location.href.split("?")[0].split("#")[0];
+    </script>
+  </body>
+</html>
